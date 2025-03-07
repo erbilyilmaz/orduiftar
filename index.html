@@ -9,14 +9,14 @@
     .container { background-color: #334155; padding: 20px; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.3); max-width: 500px; margin: 50px auto; }
     .title { color: #fca5a5; font-size: 32px; font-weight: bold; }
     .time { color: #f87171; font-size: 36px; font-weight: bold; }
-    .countdown { font-size: 56px; color: #f87171; margin-top: 15px; }
+    .countdown { font-size: 48px; color: #f87171; margin-top: 15px; }
 </style>
 </head>
 <body>
 <div class="container">
     <div class="time" id="iftarTime">İftar Saati: --:--</div>
     <h1 class="title">İftara Kalan Süre</h1>
-    <div class="countdown" id="countdown">--:--:--</div>
+    <div class="countdown" id="countdown">--:--</div>
 </div>
 <script>
 const prayerTimes = {
@@ -41,8 +41,7 @@ if (iftar) {
         const timeLeft = Math.max(0, iftarTime - now);
         const hours = String(Math.floor(timeLeft / 3600000)).padStart(2, '0');
         const minutes = String(Math.floor((timeLeft % 3600000) / 60000)).padStart(2, '0');
-        const seconds = String(Math.floor((timeLeft % 60000) / 1000)).padStart(2, '0');
-        countdownElem.textContent = `${hours} : ${minutes} : ${seconds}`;
+        countdownElem.textContent = `${hours} Saat ${minutes} Dakika`;
     };
     updateCountdown();
     setInterval(updateCountdown, 1000);
