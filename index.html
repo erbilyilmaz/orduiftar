@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İftara Kalan Süre</title>
+<style>
+    body { font-family: Arial, sans-serif; background-color: #f8f8f8; color: #333; text-align: center; }
+    .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 500px; margin: 50px auto; }
+    .title { color: #a11e22; font-size: 28px; font-weight: bold; }
+    .time { color: #a11e22; font-size: 24px; font-weight: bold; }
+    .countdown { font-size: 36px; color: #d32f2f; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title">İftara Kalan Süre</h1>
+    <div class="time" id="iftarTime">İftar: --:--</div>
+    <div class="countdown" id="countdown">--:--:--</div>
+</div>
+<script>
+const prayerTimes = {
+    '03-07': '18:33', '03-08': '18:34', '03-09': '18:35', '03-10': '18:36',
+    '03-11': '18:37', '03-12': '18:38', '03-13': '18:39', '03-14': '18:40',
+    '03-15': '18:42', '03-16': '18:43', '03-17': '18:44', '03-18': '18:45',
+    '03-19': '18:46', '03-20': '18:47', '03-21': '18:48', '03-22': '18:49',
+    '03-23': '18:50', '03-24': '18:51', '03-25': '18:52', '03-26': '18:53',
+    '03-27': '18:54', '03-28': '18:56', '03-29': '18:57'
+};
+const today = new Date();
+const dateKey = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+const iftar = prayerTimes[dateKey];
+const iftarTimeElem = document.getElementById("iftarTime");
+const countdownElem = document.getElementById("countdown");
+
+if (iftar) {
+    iftarTimeElem.textContent = `İftar: ${iftar}`;
+    const iftarTime = new Date(`${today.toDateString()} ${iftar}`);
+    const updateCountdown = () => {
+        const now = new Date();
+        const timeLeft = Math.max(0, iftarTime - now);
+        const hours = String(Math.floor(timeLeft / 3600000)).padStart(2, '0');
+        const minutes = String(Math.floor((timeLeft % 3600000) / 60000)).padStart(2, '0');
+        const seconds = String(Math.floor((timeLeft % 60000) / 1000)).padStart(2, '0');
+        countdownElem.textContent = `${hours} saat : ${minutes} dakika : ${seconds} saniye`;
+    };
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+} else {
+    iftarTimeElem.textContent = "İftar vakti bulunamadı.";
+}
+</script>
+</body>
+</html>
