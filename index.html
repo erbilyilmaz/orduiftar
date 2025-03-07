@@ -15,7 +15,7 @@
 <body>
 <div class="container">
     <h1 class="title">İftara Kalan Süre</h1>
-    <div class="time" id="iftarTime">İftar: --:--</div>
+    <div class="time" id="iftarTime">İftar Saati: --:--</div>
     <div class="countdown" id="countdown">--:--:--</div>
 </div>
 <script>
@@ -34,7 +34,7 @@ const iftarTimeElem = document.getElementById("iftarTime");
 const countdownElem = document.getElementById("countdown");
 
 if (iftar) {
-    iftarTimeElem.textContent = `İftar: ${iftar}`;
+    iftarTimeElem.textContent = `İftar Saati: ${iftar}`;
     const iftarTime = new Date(`${today.toDateString()} ${iftar}`);
     const updateCountdown = () => {
         const now = new Date();
